@@ -9,10 +9,6 @@ public class Main {
         for(int i = 0; i < arrLength; i++){
             myArray[i] = rand.nextInt(arrLength);
         }
-
-        for(int j = 0; j < myArray.length; j++){
-            System.out.println(j + ". " + myArray[j]);
-        }
     }
 }
 
