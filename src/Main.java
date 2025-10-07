@@ -10,42 +10,58 @@ public class Main {
         menu();
     }
 
-    private static void menu(){
-        int[] myArray = createRandomArray();
-
+    private static void menu() {
+        Scanner input = new Scanner(System.in);
+        int[] myArray = null;
         boolean run = true;
+
         showMenuOption();
 
-        while(run){
-            Scanner input = new Scanner(System.in);
+        while (run) {
             System.out.print("Enter your option: ");
-            switch (input.nextInt()){
-                case 0:
+            switch (getUserOption(input)) {
+                case 0 -> {
                     System.out.println("\n=====> New Array <=====");
                     myArray = createRandomArray();
-                    break;
-                case 1:
-                    showArray(myArray);
-                    break;
-                case 2:
-                    doMerge(myArray);
-                    break;
-                case 3:
-                    doQuick(myArray);
-                    break;
-                case 4:
-                    doShell(myArray);
-                    break;
-                case 5:
+                }
+                case 1 -> {
+                    if (myArray != null) showArray(myArray);
+                    else System.out.println("Array belum dibuat!");
+                }
+                case 2 -> {
+                    if (myArray != null) doMerge(myArray);
+                    else System.out.println("Array belum dibuat!");
+                }
+                case 3 -> {
+                    if (myArray != null) doQuick(myArray);
+                    else System.out.println("Array belum dibuat!");
+                }
+                case 4 -> {
+                    if (myArray != null) doShell(myArray);
+                    else System.out.println("Array belum dibuat!");
+                }
+                case 5 -> {
                     run = false;
-                    break;
-
-                default:
-                    System.out.println("Opsi tidak valid, cek kembali");
+                    System.out.println("Exiting...");
+                }
+                default -> {
+                    System.out.println("Opsi tidak valid!");
                     showMenuOption();
+                }
             }
         }
+
+        input.close();
     }
+
+    private static int getUserOption(Scanner input) {
+        while (!input.hasNextInt()) {
+            System.out.print("Masukkan angka yang valid: ");
+            input.next(); // discard invalid input
+        }
+        return input.nextInt();
+    }
+
 
     private static void showMenuOption(){
         System.out.println("\n==== Sorting Menu ====");
