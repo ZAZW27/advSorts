@@ -2,6 +2,7 @@ import sorts.Merge;
 import sorts.Quick;
 import sorts.Shell;
 
+import java.util.Arrays;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -20,28 +21,34 @@ public class Main {
         showMenuOption();
 
         while (run) {
-            int[] consistArr = absoluteArray;
             System.out.print("Enter your option: ");
             switch (getUserOption(input)) {
                 case 0 -> {
                     System.out.println("\n=====> New Array <=====");
-                    myArray = createRandomArray();
+                    absoluteArray = createRandomArray(); // reset the base array
+                    myArray = null; // optional: clear current sorted copy
                 }
                 case 1 -> {
-                    if (myArray != null) showArray(consistArr);
+                    if (absoluteArray != null) showArray(absoluteArray);
                     else System.out.println("Array belum dibuat!");
                 }
                 case 2 -> {
-                    if (myArray != null) doMerge(consistArr);
-                    else System.out.println("Array belum dibuat!");
+                    if (absoluteArray != null) {
+                        int[] consistArr = Arrays.copyOf(absoluteArray, absoluteArray.length);
+                        doMerge(consistArr);
+                    } else System.out.println("Array belum dibuat!");
                 }
                 case 3 -> {
-                    if (myArray != null) doQuick(consistArr);
-                    else System.out.println("Array belum dibuat!");
+                    if (absoluteArray != null) {
+                        int[] consistArr = Arrays.copyOf(absoluteArray, absoluteArray.length);
+                        doQuick(consistArr);
+                    } else System.out.println("Array belum dibuat!");
                 }
                 case 4 -> {
-                    if (myArray != null) doShell(consistArr);
-                    else System.out.println("Array belum dibuat!");
+                    if (absoluteArray != null) {
+                        int[] consistArr = Arrays.copyOf(absoluteArray, absoluteArray.length);
+                        doShell(consistArr);
+                    } else System.out.println("Array belum dibuat!");
                 }
                 case 5 -> {
                     run = false;
@@ -85,12 +92,12 @@ public class Main {
     }
 
     private static int[] createRandomArray(){
-        int arrLength = 10000;
+        int arrLength = 100;
 
         int[] myArray = new int[arrLength];
         Random rand = new Random();
         for(int i = 0; i < arrLength; i++){
-            myArray[i] = rand.nextInt(arrLength);
+            myArray[i] = i;
         }
 
         showArray(myArray);
