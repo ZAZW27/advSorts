@@ -13,11 +13,14 @@ public class Main {
     private static void menu() {
         Scanner input = new Scanner(System.in);
         int[] myArray = null;
+        int[] absoluteArray = createRandomArray();
+
         boolean run = true;
 
         showMenuOption();
 
         while (run) {
+            int[] consistArr = absoluteArray;
             System.out.print("Enter your option: ");
             switch (getUserOption(input)) {
                 case 0 -> {
@@ -25,19 +28,19 @@ public class Main {
                     myArray = createRandomArray();
                 }
                 case 1 -> {
-                    if (myArray != null) showArray(myArray);
+                    if (myArray != null) showArray(consistArr);
                     else System.out.println("Array belum dibuat!");
                 }
                 case 2 -> {
-                    if (myArray != null) doMerge(myArray);
+                    if (myArray != null) doMerge(consistArr);
                     else System.out.println("Array belum dibuat!");
                 }
                 case 3 -> {
-                    if (myArray != null) doQuick(myArray);
+                    if (myArray != null) doQuick(consistArr);
                     else System.out.println("Array belum dibuat!");
                 }
                 case 4 -> {
-                    if (myArray != null) doShell(myArray);
+                    if (myArray != null) doShell(consistArr);
                     else System.out.println("Array belum dibuat!");
                 }
                 case 5 -> {
@@ -82,7 +85,7 @@ public class Main {
     }
 
     private static int[] createRandomArray(){
-        int arrLength = 10;
+        int arrLength = 10000;
 
         int[] myArray = new int[arrLength];
         Random rand = new Random();
@@ -98,28 +101,45 @@ public class Main {
     private static void doMerge(int[] arr){
         System.out.println("\n=========== Original Array ===========");
         showArray(arr);
-
         System.out.println("\n============ Merge Sorted ============");
+
+        long startTime = System.nanoTime();
         Merge.mergeSort(arr);
+        String timeTaken = timeSpent(System.nanoTime() - startTime);
+
         showArray(arr);
+
+        System.out.println(timeTaken);
     }
 
     private static void doQuick(int[] arr){
         System.out.println("\n=========== Original Array ===========");
         showArray(arr);
-
         System.out.println("\n============ Quick Sorted ============");
+
+        long startTime = System.nanoTime();
         Quick.quickSort(arr, 0, arr.length - 1);
+        String timeTaken = timeSpent(System.nanoTime() - startTime);
+
         showArray(arr);
+        System.out.println(timeTaken);
     }
 
     private static void doShell(int[] arr){
         System.out.println("\n=========== Original Array ===========");
         showArray(arr);
-
         System.out.println("\n============ Shell Sorted ============");
+
+        long startTime = System.nanoTime();
         Shell.shellSort(arr);
+        String timeTaken = timeSpent(System.nanoTime() - startTime);
+
         showArray(arr);
+        System.out.println(timeTaken);
+    }
+
+    public static String timeSpent(long nanotime){
+        return String.format("%06.2f ms%n", (nanotime) / 1_000_000.0);
     }
 }
 
