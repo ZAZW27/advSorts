@@ -92,7 +92,7 @@ public class Main {
     }
 
     private static int[] createRandomArray(){
-        int arrLength = 100;
+        int arrLength = 10;
 
         int[] myArray = new int[arrLength];
         Random rand = new Random();
@@ -125,7 +125,7 @@ public class Main {
         System.out.println("\n============ Quick Sorted ============");
 
         long startTime = System.nanoTime();
-        Quick.quickSort(arr, 0, arr.length - 1);
+        Quick.quickSort(arr);
         String timeTaken = timeSpent(System.nanoTime() - startTime);
 
         showArray(arr);
