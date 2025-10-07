@@ -97,7 +97,7 @@ public class Main {
         int[] myArray = new int[arrLength];
         Random rand = new Random();
         for(int i = 0; i < arrLength; i++){
-            myArray[i] = i;
+            myArray[i] = arrLength - i;
         }
 
         showArray(myArray);
