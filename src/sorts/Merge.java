@@ -3,9 +3,10 @@ import java.io.*;
 
 public class Merge {
     public static void mergeSort(int[] arr){
-        breakDown(arr);
+        divide(arr);
     }
-    static void breakDown(int[] arr){
+
+    static void divide(int[] arr){
         int length = arr.length;
         if (length <= 1)return;
 
@@ -20,9 +21,9 @@ public class Merge {
             else rightArray[j++] = arr[i];
         }
 
-        breakDown(leftArray);
+        divide(leftArray);
 
-        breakDown(rightArray);
+        divide(rightArray);
 
         merge(leftArray, rightArray, arr);
     }
@@ -31,32 +32,23 @@ public class Merge {
         int leftSize = leftArray.length;
         int rightSize = rightArray.length;
 
-        int i = 0;
-        int rightIdx = 0;
-        int leftIdx = 0;
+        int i = 0, rightIdx = 0, leftIdx = 0;
 
         while(leftIdx < leftSize && rightIdx < rightSize){
             if(leftArray[leftIdx] < rightArray[rightIdx]){
-                mainArray[i] = leftArray[leftIdx];
-                leftIdx++;
+                mainArray[i++] = leftArray[leftIdx++];
             }
             else{
-                mainArray[i] = rightArray[rightIdx];
-                rightIdx++;
+                mainArray[i++] = rightArray[rightIdx++];
             }
-            i++;
         }
 
         while(leftIdx < leftSize){
-            mainArray[i] = leftArray[leftIdx];
-            i++;
-            leftIdx++;
+            mainArray[i++] = leftArray[leftIdx++];
         }
 
         while(rightIdx < rightSize){
-            mainArray[i] = rightArray[rightIdx];
-            i++;
-            rightIdx++;
+            mainArray[i++] = rightArray[rightIdx++];
         }
     }
 }
