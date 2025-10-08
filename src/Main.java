@@ -133,9 +133,9 @@ public class Main {
     }
 
     private static void doShell(int[] arr){
-        System.out.println("\n=========== Original Array ===========");
-        showArray(arr);
-        System.out.println("\n============ Shell Sorted ============");
+//        System.out.println("\n=========== Original Array ===========");
+//        showArray(arr);
+//        System.out.println("\n============ Shell Sorted ============");
 
         long startTime = System.nanoTime();
         Shell.shellSort(arr);
